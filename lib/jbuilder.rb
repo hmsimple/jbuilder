@@ -43,7 +43,8 @@ class Jbuilder < BlankSlate
     @attributes << _new_instance._tap { |jbuilder| yield jbuilder }.attributes!
   end
 
-  # Iterates over the passed collection and adds each iteration as an element of the resulting array.
+  # Turns the current element into an array and iterates over the passed collection, adding each iteration as 
+  # an element of the resulting array.
   #
   # Example:
   #
@@ -66,8 +67,6 @@ class Jbuilder < BlankSlate
   #   end  
   #
   #   { "people": [ { "David", 32 }, { "Jamie", 31 } ] }
-  #
-  # If the passed collection is empty, then the entire object will be turned into an empty array.
   def array!(collection)
     @attributes = [] and return if collection.empty?
     
