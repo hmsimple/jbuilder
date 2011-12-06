@@ -67,6 +67,8 @@ class Jbuilder < BlankSlate
   #
   #   { "people": [ { "David", 32 }, { "Jamie", 31 } ] }
   def array!(collection)
+    parent.array!([]) and return if collection.empty?
+  
     collection.each do |element|
       child! do |child|
         yield child, element
