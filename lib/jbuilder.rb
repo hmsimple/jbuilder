@@ -66,9 +66,11 @@ class Jbuilder < BlankSlate
   #   end  
   #
   #   { "people": [ { "David", 32 }, { "Jamie", 31 } ] }
+  #
+  # If the passed collection is empty, then the entire object will be turned into an empty array.
   def array!(collection)
-    parent.array!([]) and return if collection.empty?
-  
+    @attributes = [] and return if collection.empty?
+    
     collection.each do |element|
       child! do |child|
         yield child, element
