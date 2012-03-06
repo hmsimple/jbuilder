@@ -121,12 +121,12 @@ class Jbuilder < BlankSlate
       case
       # json.comments @post.comments { |json, comment| ... }
       # { "comments": [ { ...}, { ... } ] }
-      when args.one? && block_given?
+      when args.size == 1 && block_given?
         _yield_iteration(method, args.first) { |child, element| yield child, element }
 
       # json.age 32
       # { "age": 32 }
-      when args.one?
+      when args.size == 1
         set! method, args.first
 
       # json.comments { |json| ... }
