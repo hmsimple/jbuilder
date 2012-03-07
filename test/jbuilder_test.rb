@@ -111,6 +111,19 @@ class JbuilderTest < ActiveSupport::TestCase
     end
   end
   
+  test "nesting multiple children from array when child array is empty" do
+    comments = []
+    
+    json = Jbuilder.encode do |json|
+      json.name "Parent"
+      json.comments comments, :content
+    end
+    
+    JSON.parse(json).tap do |parsed|
+      assert_equal "Parent", parsed["name"]
+      assert_equal [], parsed["comments"]
+    end
+  end
   
   test "nesting multiple children from array with inline loop" do
     comments = [ Struct.new(:content, :id).new("hello", 1), Struct.new(:content, :id).new("world", 2) ]
